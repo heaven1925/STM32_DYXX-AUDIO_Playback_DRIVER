@@ -30,7 +30,7 @@
 /*
  * Arm Compiler 4/5
  */
-#if   defined ( __CC_ARM )
+#if   defined (__CC_ARM)
   #include "cmsis_armcc.h"
 
 
@@ -44,21 +44,21 @@
 /*
  * GNU Compiler
  */
-#elif defined ( __GNUC__ )
+#elif defined (__GNUC__)
   #include "cmsis_gcc.h"
 
 
 /*
  * IAR Compiler
  */
-#elif defined ( __ICCARM__ )
+#elif defined (__ICCARM__)
   #include <cmsis_iccarm.h>
 
 
 /*
  * TI Arm Compiler
  */
-#elif defined ( __TI_ARM__ )
+#elif defined (__TI_ARM__)
   #include <cmsis_ccs.h>
 
   #ifndef   __ASM
@@ -92,23 +92,23 @@
     #define __PACKED_UNION                         union __attribute__((packed))
   #endif
   #ifndef   __UNALIGNED_UINT32        /* deprecated */
-    struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+struct __attribute__((packed)) T_UINT32 {uint32_t v; };
     #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
   #endif
   #ifndef   __UNALIGNED_UINT16_WRITE
-    __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
-    #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void*)(addr))->v) = (val))
+__PACKED_STRUCT T_UINT16_WRITE {uint16_t v; };
+    #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT16_READ
-    __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+__PACKED_STRUCT T_UINT16_READ {uint16_t v; };
     #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __UNALIGNED_UINT32_WRITE
-    __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+__PACKED_STRUCT T_UINT32_WRITE {uint32_t v; };
     #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT32_READ
-    __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+__PACKED_STRUCT T_UINT32_READ {uint32_t v; };
     #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __ALIGNED
@@ -123,12 +123,12 @@
 /*
  * TASKING Compiler
  */
-#elif defined ( __TASKING__ )
-  /*
-   * The CMSIS functions have been implemented as intrinsics in the compiler.
-   * Please use "carm -?i" to get an up to date list of all intrinsics,
-   * Including the CMSIS ones.
-   */
+#elif defined (__TASKING__)
+/*
+ * The CMSIS functions have been implemented as intrinsics in the compiler.
+ * Please use "carm -?i" to get an up to date list of all intrinsics,
+ * Including the CMSIS ones.
+ */
 
   #ifndef   __ASM
     #define __ASM                                  __asm
@@ -161,23 +161,23 @@
     #define __PACKED_UNION                         union __packed__
   #endif
   #ifndef   __UNALIGNED_UINT32        /* deprecated */
-    struct __packed__ T_UINT32 { uint32_t v; };
+struct __packed__ T_UINT32 {uint32_t v; };
     #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
   #endif
   #ifndef   __UNALIGNED_UINT16_WRITE
-    __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+__PACKED_STRUCT T_UINT16_WRITE {uint16_t v; };
     #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT16_READ
-    __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+__PACKED_STRUCT T_UINT16_READ {uint16_t v; };
     #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __UNALIGNED_UINT32_WRITE
-    __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+__PACKED_STRUCT T_UINT32_WRITE {uint32_t v; };
     #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT32_READ
-    __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+__PACKED_STRUCT T_UINT32_READ {uint32_t v; };
     #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __ALIGNED
@@ -192,7 +192,7 @@
 /*
  * COSMIC Compiler
  */
-#elif defined ( __CSMC__ )
+#elif defined (__CSMC__)
    #include <cmsis_csm.h>
 
  #ifndef   __ASM
@@ -208,7 +208,7 @@
     #define __STATIC_FORCEINLINE                   __STATIC_INLINE
   #endif
   #ifndef   __NO_RETURN
-    // NO RETURN is automatically detected hence no warning here
+// NO RETURN is automatically detected hence no warning here
     #define __NO_RETURN
   #endif
   #ifndef   __USED
@@ -225,26 +225,26 @@
     #define __PACKED_STRUCT                        @packed struct
   #endif
   #ifndef   __PACKED_UNION
-    #define __PACKED_UNION                         @packed union
+    #define __PACKED_UNION @packed union
   #endif
   #ifndef   __UNALIGNED_UINT32        /* deprecated */
-    @packed struct T_UINT32 { uint32_t v; };
+@packed struct T_UINT32 { uint32_t v; };
     #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
   #endif
   #ifndef   __UNALIGNED_UINT16_WRITE
-    __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+__PACKED_STRUCT T_UINT16_WRITE {uint16_t v; };
     #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT16_READ
-    __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+__PACKED_STRUCT T_UINT16_READ {uint16_t v; };
     #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __UNALIGNED_UINT32_WRITE
-    __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+__PACKED_STRUCT T_UINT32_WRITE {uint32_t v; };
     #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))->v) = (val))
   #endif
   #ifndef   __UNALIGNED_UINT32_READ
-    __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+__PACKED_STRUCT T_UINT32_READ {uint32_t v; };
     #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(addr))->v)
   #endif
   #ifndef   __ALIGNED

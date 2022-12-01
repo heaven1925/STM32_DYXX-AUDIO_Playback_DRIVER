@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-#if   defined ( __ICCARM__ )
+#if   defined (__ICCARM__)
   #pragma system_include         /* treat file as system include file for MISRA check */
 #elif defined (__clang__)
   #pragma clang system_header   /* treat file as system include file */
@@ -34,7 +34,7 @@
 #include <stdint.h>
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /**
@@ -61,12 +61,12 @@
  */
 
 #include "cmsis_version.h"
- 
+
 /*  CMSIS CM0 definitions */
 #define __CM0_CMSIS_VERSION_MAIN  (__CM_CMSIS_VERSION_MAIN)              /*!< \deprecated [31:16] CMSIS HAL main version */
 #define __CM0_CMSIS_VERSION_SUB   (__CM_CMSIS_VERSION_SUB)               /*!< \deprecated [15:0]  CMSIS HAL sub version */
 #define __CM0_CMSIS_VERSION       ((__CM0_CMSIS_VERSION_MAIN << 16U) | \
-                                    __CM0_CMSIS_VERSION_SUB           )  /*!< \deprecated CMSIS HAL version number */
+                                   __CM0_CMSIS_VERSION_SUB)              /*!< \deprecated CMSIS HAL version number */
 
 #define __CORTEX_M                (0U)                                   /*!< Cortex-M Core */
 
@@ -75,7 +75,7 @@
 */
 #define __FPU_USED       0U
 
-#if defined ( __CC_ARM )
+#if defined (__CC_ARM)
   #if defined __TARGET_FPU_VFP
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
@@ -85,28 +85,28 @@
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
-#elif defined ( __GNUC__ )
+#elif defined (__GNUC__)
   #if defined (__VFP_FP__) && !defined(__SOFTFP__)
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
-#elif defined ( __ICCARM__ )
+#elif defined (__ICCARM__)
   #if defined __ARMVFP__
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
-#elif defined ( __TI_ARM__ )
+#elif defined (__TI_ARM__)
   #if defined __TI_VFP_SUPPORT__
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
-#elif defined ( __TASKING__ )
+#elif defined (__TASKING__)
   #if defined __FPU_VFP__
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
-#elif defined ( __CSMC__ )
-  #if ( __CSMC__ & 0x400U)
+#elif defined (__CSMC__)
+  #if (__CSMC__ & 0x400U)
     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
   #endif
 
@@ -127,7 +127,7 @@
 #define __CORE_CM0_H_DEPENDANT
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* check device defines and use defaults */
@@ -198,15 +198,15 @@
  */
 typedef union
 {
-  struct
-  {
-    uint32_t _reserved0:28;              /*!< bit:  0..27  Reserved */
-    uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag */
-    uint32_t C:1;                        /*!< bit:     29  Carry condition code flag */
-    uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag */
-    uint32_t N:1;                        /*!< bit:     31  Negative condition code flag */
-  } b;                                   /*!< Structure used for bit  access */
-  uint32_t w;                            /*!< Type      used for word access */
+    struct
+    {
+        uint32_t _reserved0 : 28;        /*!< bit:  0..27  Reserved */
+        uint32_t V : 1;                  /*!< bit:     28  Overflow condition code flag */
+        uint32_t C : 1;                  /*!< bit:     29  Carry condition code flag */
+        uint32_t Z : 1;                  /*!< bit:     30  Zero condition code flag */
+        uint32_t N : 1;                  /*!< bit:     31  Negative condition code flag */
+    } b;                                 /*!< Structure used for bit  access */
+    uint32_t w;                          /*!< Type      used for word access */
 } APSR_Type;
 
 /* APSR Register Definitions */
@@ -228,17 +228,17 @@ typedef union
  */
 typedef union
 {
-  struct
-  {
-    uint32_t ISR:9;                      /*!< bit:  0.. 8  Exception number */
-    uint32_t _reserved0:23;              /*!< bit:  9..31  Reserved */
-  } b;                                   /*!< Structure used for bit  access */
-  uint32_t w;                            /*!< Type      used for word access */
+    struct
+    {
+        uint32_t ISR : 9;                /*!< bit:  0.. 8  Exception number */
+        uint32_t _reserved0 : 23;        /*!< bit:  9..31  Reserved */
+    } b;                                 /*!< Structure used for bit  access */
+    uint32_t w;                          /*!< Type      used for word access */
 } IPSR_Type;
 
 /* IPSR Register Definitions */
 #define IPSR_ISR_Pos                        0U                                            /*!< IPSR: ISR Position */
-#define IPSR_ISR_Msk                       (0x1FFUL /*<< IPSR_ISR_Pos*/)                  /*!< IPSR: ISR Mask */
+#define IPSR_ISR_Msk                       (0x1FFUL   /*<< IPSR_ISR_Pos*/)                /*!< IPSR: ISR Mask */
 
 
 /**
@@ -246,18 +246,18 @@ typedef union
  */
 typedef union
 {
-  struct
-  {
-    uint32_t ISR:9;                      /*!< bit:  0.. 8  Exception number */
-    uint32_t _reserved0:15;              /*!< bit:  9..23  Reserved */
-    uint32_t T:1;                        /*!< bit:     24  Thumb bit        (read 0) */
-    uint32_t _reserved1:3;               /*!< bit: 25..27  Reserved */
-    uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag */
-    uint32_t C:1;                        /*!< bit:     29  Carry condition code flag */
-    uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag */
-    uint32_t N:1;                        /*!< bit:     31  Negative condition code flag */
-  } b;                                   /*!< Structure used for bit  access */
-  uint32_t w;                            /*!< Type      used for word access */
+    struct
+    {
+        uint32_t ISR : 9;                /*!< bit:  0.. 8  Exception number */
+        uint32_t _reserved0 : 15;        /*!< bit:  9..23  Reserved */
+        uint32_t T : 1;                  /*!< bit:     24  Thumb bit        (read 0) */
+        uint32_t _reserved1 : 3;         /*!< bit: 25..27  Reserved */
+        uint32_t V : 1;                  /*!< bit:     28  Overflow condition code flag */
+        uint32_t C : 1;                  /*!< bit:     29  Carry condition code flag */
+        uint32_t Z : 1;                  /*!< bit:     30  Zero condition code flag */
+        uint32_t N : 1;                  /*!< bit:     31  Negative condition code flag */
+    } b;                                 /*!< Structure used for bit  access */
+    uint32_t w;                          /*!< Type      used for word access */
 } xPSR_Type;
 
 /* xPSR Register Definitions */
@@ -277,7 +277,7 @@ typedef union
 #define xPSR_T_Msk                         (1UL << xPSR_T_Pos)                            /*!< xPSR: T Mask */
 
 #define xPSR_ISR_Pos                        0U                                            /*!< xPSR: ISR Position */
-#define xPSR_ISR_Msk                       (0x1FFUL /*<< xPSR_ISR_Pos*/)                  /*!< xPSR: ISR Mask */
+#define xPSR_ISR_Msk                       (0x1FFUL   /*<< xPSR_ISR_Pos*/)                /*!< xPSR: ISR Mask */
 
 
 /**
@@ -285,13 +285,13 @@ typedef union
  */
 typedef union
 {
-  struct
-  {
-    uint32_t _reserved0:1;               /*!< bit:      0  Reserved */
-    uint32_t SPSEL:1;                    /*!< bit:      1  Stack to be used */
-    uint32_t _reserved1:30;              /*!< bit:  2..31  Reserved */
-  } b;                                   /*!< Structure used for bit  access */
-  uint32_t w;                            /*!< Type      used for word access */
+    struct
+    {
+        uint32_t _reserved0 : 1;         /*!< bit:      0  Reserved */
+        uint32_t SPSEL : 1;              /*!< bit:      1  Stack to be used */
+        uint32_t _reserved1 : 30;        /*!< bit:  2..31  Reserved */
+    } b;                                 /*!< Structure used for bit  access */
+    uint32_t w;                          /*!< Type      used for word access */
 } CONTROL_Type;
 
 /* CONTROL Register Definitions */
@@ -313,16 +313,16 @@ typedef union
  */
 typedef struct
 {
-  __IOM uint32_t ISER[1U];               /*!< Offset: 0x000 (R/W)  Interrupt Set Enable Register */
-        uint32_t RESERVED0[31U];
-  __IOM uint32_t ICER[1U];               /*!< Offset: 0x080 (R/W)  Interrupt Clear Enable Register */
-        uint32_t RSERVED1[31U];
-  __IOM uint32_t ISPR[1U];               /*!< Offset: 0x100 (R/W)  Interrupt Set Pending Register */
-        uint32_t RESERVED2[31U];
-  __IOM uint32_t ICPR[1U];               /*!< Offset: 0x180 (R/W)  Interrupt Clear Pending Register */
-        uint32_t RESERVED3[31U];
-        uint32_t RESERVED4[64U];
-  __IOM uint32_t IP[8U];                 /*!< Offset: 0x300 (R/W)  Interrupt Priority Register */
+    __IOM uint32_t ISER[1U];             /*!< Offset: 0x000 (R/W)  Interrupt Set Enable Register */
+    uint32_t       RESERVED0[31U];
+    __IOM uint32_t ICER[1U];             /*!< Offset: 0x080 (R/W)  Interrupt Clear Enable Register */
+    uint32_t       RSERVED1[31U];
+    __IOM uint32_t ISPR[1U];             /*!< Offset: 0x100 (R/W)  Interrupt Set Pending Register */
+    uint32_t       RESERVED2[31U];
+    __IOM uint32_t ICPR[1U];             /*!< Offset: 0x180 (R/W)  Interrupt Clear Pending Register */
+    uint32_t       RESERVED3[31U];
+    uint32_t       RESERVED4[64U];
+    __IOM uint32_t IP[8U];               /*!< Offset: 0x300 (R/W)  Interrupt Priority Register */
 }  NVIC_Type;
 
 /*@} end of group CMSIS_NVIC */
@@ -340,15 +340,15 @@ typedef struct
  */
 typedef struct
 {
-  __IM  uint32_t CPUID;                  /*!< Offset: 0x000 (R/ )  CPUID Base Register */
-  __IOM uint32_t ICSR;                   /*!< Offset: 0x004 (R/W)  Interrupt Control and State Register */
-        uint32_t RESERVED0;
-  __IOM uint32_t AIRCR;                  /*!< Offset: 0x00C (R/W)  Application Interrupt and Reset Control Register */
-  __IOM uint32_t SCR;                    /*!< Offset: 0x010 (R/W)  System Control Register */
-  __IOM uint32_t CCR;                    /*!< Offset: 0x014 (R/W)  Configuration Control Register */
-        uint32_t RESERVED1;
-  __IOM uint32_t SHP[2U];                /*!< Offset: 0x01C (R/W)  System Handlers Priority Registers. [0] is RESERVED */
-  __IOM uint32_t SHCSR;                  /*!< Offset: 0x024 (R/W)  System Handler Control and State Register */
+    __IM uint32_t  CPUID;                /*!< Offset: 0x000 (R/ )  CPUID Base Register */
+    __IOM uint32_t ICSR;                 /*!< Offset: 0x004 (R/W)  Interrupt Control and State Register */
+    uint32_t       RESERVED0;
+    __IOM uint32_t AIRCR;                /*!< Offset: 0x00C (R/W)  Application Interrupt and Reset Control Register */
+    __IOM uint32_t SCR;                  /*!< Offset: 0x010 (R/W)  System Control Register */
+    __IOM uint32_t CCR;                  /*!< Offset: 0x014 (R/W)  Configuration Control Register */
+    uint32_t       RESERVED1;
+    __IOM uint32_t SHP[2U];              /*!< Offset: 0x01C (R/W)  System Handlers Priority Registers. [0] is RESERVED */
+    __IOM uint32_t SHCSR;                /*!< Offset: 0x024 (R/W)  System Handler Control and State Register */
 } SCB_Type;
 
 /* SCB CPUID Register Definitions */
@@ -365,7 +365,7 @@ typedef struct
 #define SCB_CPUID_PARTNO_Msk               (0xFFFUL << SCB_CPUID_PARTNO_Pos)              /*!< SCB CPUID: PARTNO Mask */
 
 #define SCB_CPUID_REVISION_Pos              0U                                            /*!< SCB CPUID: REVISION Position */
-#define SCB_CPUID_REVISION_Msk             (0xFUL /*<< SCB_CPUID_REVISION_Pos*/)          /*!< SCB CPUID: REVISION Mask */
+#define SCB_CPUID_REVISION_Msk             (0xFUL   /*<< SCB_CPUID_REVISION_Pos*/)        /*!< SCB CPUID: REVISION Mask */
 
 /* SCB Interrupt Control State Register Definitions */
 #define SCB_ICSR_NMIPENDSET_Pos            31U                                            /*!< SCB ICSR: NMIPENDSET Position */
@@ -393,7 +393,7 @@ typedef struct
 #define SCB_ICSR_VECTPENDING_Msk           (0x1FFUL << SCB_ICSR_VECTPENDING_Pos)          /*!< SCB ICSR: VECTPENDING Mask */
 
 #define SCB_ICSR_VECTACTIVE_Pos             0U                                            /*!< SCB ICSR: VECTACTIVE Position */
-#define SCB_ICSR_VECTACTIVE_Msk            (0x1FFUL /*<< SCB_ICSR_VECTACTIVE_Pos*/)       /*!< SCB ICSR: VECTACTIVE Mask */
+#define SCB_ICSR_VECTACTIVE_Msk            (0x1FFUL   /*<< SCB_ICSR_VECTACTIVE_Pos*/)     /*!< SCB ICSR: VECTACTIVE Mask */
 
 /* SCB Application Interrupt and Reset Control Register Definitions */
 #define SCB_AIRCR_VECTKEY_Pos              16U                                            /*!< SCB AIRCR: VECTKEY Position */
@@ -447,10 +447,10 @@ typedef struct
  */
 typedef struct
 {
-  __IOM uint32_t CTRL;                   /*!< Offset: 0x000 (R/W)  SysTick Control and Status Register */
-  __IOM uint32_t LOAD;                   /*!< Offset: 0x004 (R/W)  SysTick Reload Value Register */
-  __IOM uint32_t VAL;                    /*!< Offset: 0x008 (R/W)  SysTick Current Value Register */
-  __IM  uint32_t CALIB;                  /*!< Offset: 0x00C (R/ )  SysTick Calibration Register */
+    __IOM uint32_t CTRL;                 /*!< Offset: 0x000 (R/W)  SysTick Control and Status Register */
+    __IOM uint32_t LOAD;                 /*!< Offset: 0x004 (R/W)  SysTick Reload Value Register */
+    __IOM uint32_t VAL;                  /*!< Offset: 0x008 (R/W)  SysTick Current Value Register */
+    __IM uint32_t  CALIB;                /*!< Offset: 0x00C (R/ )  SysTick Calibration Register */
 } SysTick_Type;
 
 /* SysTick Control / Status Register Definitions */
@@ -464,15 +464,15 @@ typedef struct
 #define SysTick_CTRL_TICKINT_Msk           (1UL << SysTick_CTRL_TICKINT_Pos)              /*!< SysTick CTRL: TICKINT Mask */
 
 #define SysTick_CTRL_ENABLE_Pos             0U                                            /*!< SysTick CTRL: ENABLE Position */
-#define SysTick_CTRL_ENABLE_Msk            (1UL /*<< SysTick_CTRL_ENABLE_Pos*/)           /*!< SysTick CTRL: ENABLE Mask */
+#define SysTick_CTRL_ENABLE_Msk            (1UL   /*<< SysTick_CTRL_ENABLE_Pos*/)         /*!< SysTick CTRL: ENABLE Mask */
 
 /* SysTick Reload Register Definitions */
 #define SysTick_LOAD_RELOAD_Pos             0U                                            /*!< SysTick LOAD: RELOAD Position */
-#define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFUL /*<< SysTick_LOAD_RELOAD_Pos*/)    /*!< SysTick LOAD: RELOAD Mask */
+#define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFUL   /*<< SysTick_LOAD_RELOAD_Pos*/)  /*!< SysTick LOAD: RELOAD Mask */
 
 /* SysTick Current Register Definitions */
 #define SysTick_VAL_CURRENT_Pos             0U                                            /*!< SysTick VAL: CURRENT Position */
-#define SysTick_VAL_CURRENT_Msk            (0xFFFFFFUL /*<< SysTick_VAL_CURRENT_Pos*/)    /*!< SysTick VAL: CURRENT Mask */
+#define SysTick_VAL_CURRENT_Msk            (0xFFFFFFUL   /*<< SysTick_VAL_CURRENT_Pos*/)  /*!< SysTick VAL: CURRENT Mask */
 
 /* SysTick Calibration Register Definitions */
 #define SysTick_CALIB_NOREF_Pos            31U                                            /*!< SysTick CALIB: NOREF Position */
@@ -482,7 +482,7 @@ typedef struct
 #define SysTick_CALIB_SKEW_Msk             (1UL << SysTick_CALIB_SKEW_Pos)                /*!< SysTick CALIB: SKEW Mask */
 
 #define SysTick_CALIB_TENMS_Pos             0U                                            /*!< SysTick CALIB: TENMS Position */
-#define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL /*<< SysTick_CALIB_TENMS_Pos*/)    /*!< SysTick CALIB: TENMS Mask */
+#define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL   /*<< SysTick_CALIB_TENMS_Pos*/)  /*!< SysTick CALIB: TENMS Mask */
 
 /*@} end of group CMSIS_SysTick */
 
@@ -536,9 +536,9 @@ typedef struct
 #define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address */
 #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Base Address */
 
-#define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct */
-#define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick configuration struct */
-#define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struct */
+#define SCB                 ((SCB_Type       *)SCB_BASE)     /*!< SCB configuration struct */
+#define SysTick             ((SysTick_Type   *)SysTick_BASE) /*!< SysTick configuration struct */
+#define NVIC                ((NVIC_Type      *)NVIC_BASE)    /*!< NVIC configuration struct */
 
 
 /*@} */
@@ -607,9 +607,9 @@ typedef struct
 
 /* Interrupt Priorities are WORD accessible only under Armv6-M                  */
 /* The following MACROS handle generation of the register offset and byte masks */
-#define _BIT_SHIFT(IRQn)         (  ((((uint32_t)(int32_t)(IRQn))         )      &  0x03UL) * 8UL)
-#define _SHP_IDX(IRQn)           ( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >>    2UL)      )
-#define _IP_IDX(IRQn)            (   (((uint32_t)(int32_t)(IRQn))                >>    2UL)      )
+#define _BIT_SHIFT(IRQn)         (((((uint32_t)(int32_t)(IRQn)))      &  0x03UL) * 8UL)
+#define _SHP_IDX(IRQn)           ((((((uint32_t)(int32_t)(IRQn)) & 0x0FUL) - 8UL) >>    2UL))
+#define _IP_IDX(IRQn)            ((((uint32_t)(int32_t)(IRQn))                >>    2UL))
 
 #define __NVIC_SetPriorityGrouping(X) (void)(X)
 #define __NVIC_GetPriorityGrouping()  (0U)
@@ -622,10 +622,10 @@ typedef struct
  */
 __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+    }
 }
 
 
@@ -639,14 +639,14 @@ __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    return((uint32_t)(((NVIC->ISER[0U] & (1UL << (((uint32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-  }
-  else
-  {
-    return(0U);
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        return ((uint32_t)(((NVIC->ISER[0U] & (1UL << (((uint32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
+    }
+    else
+    {
+        return (0U);
+    }
 }
 
 
@@ -658,12 +658,12 @@ __STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-    __DSB();
-    __ISB();
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+        __DSB();
+        __ISB();
+    }
 }
 
 
@@ -677,14 +677,14 @@ __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    return((uint32_t)(((NVIC->ISPR[0U] & (1UL << (((uint32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-  }
-  else
-  {
-    return(0U);
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        return ((uint32_t)(((NVIC->ISPR[0U] & (1UL << (((uint32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
+    }
+    else
+    {
+        return (0U);
+    }
 }
 
 
@@ -696,10 +696,10 @@ __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    NVIC->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        NVIC->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+    }
 }
 
 
@@ -711,10 +711,10 @@ __STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    NVIC->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        NVIC->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+    }
 }
 
 
@@ -729,16 +729,16 @@ __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
  */
 __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
 {
-  if ((int32_t)(IRQn) >= 0)
-  {
-    NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
-       (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
-  }
-  else
-  {
-    SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
-       (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
+                                    (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
+    }
+    else
+    {
+        SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
+                                    (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
+    }
 }
 
 
@@ -753,15 +753,14 @@ __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
  */
 __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
 {
-
-  if ((int32_t)(IRQn) >= 0)
-  {
-    return((uint32_t)(((NVIC->IP[ _IP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
-  }
-  else
-  {
-    return((uint32_t)(((SCB->SHP[_SHP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
-  }
+    if ((int32_t)(IRQn) >= 0)
+    {
+        return ((uint32_t)(((NVIC->IP[_IP_IDX(IRQn)] >> _BIT_SHIFT(IRQn)) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
+    }
+    else
+    {
+        return ((uint32_t)(((SCB->SHP[_SHP_IDX(IRQn)] >> _BIT_SHIFT(IRQn)) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
+    }
 }
 
 
@@ -776,19 +775,19 @@ __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
   \param [in]       SubPriority  Subpriority value (starting from 0).
   \return                        Encoded priority. Value can be used in the function \ref NVIC_SetPriority().
  */
-__STATIC_INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t PreemptPriority, uint32_t SubPriority)
+__STATIC_INLINE uint32_t NVIC_EncodePriority(uint32_t PriorityGroup, uint32_t PreemptPriority, uint32_t SubPriority)
 {
-  uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t)0x07UL);   /* only values 0..7 are used          */
-  uint32_t PreemptPriorityBits;
-  uint32_t SubPriorityBits;
+    uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t)0x07UL);   /* only values 0..7 are used          */
+    uint32_t PreemptPriorityBits;
+    uint32_t SubPriorityBits;
 
-  PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
-  SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint32_t)0UL : (uint32_t)((PriorityGroupTmp - 7UL) + (uint32_t)(__NVIC_PRIO_BITS));
+    PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
+    SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint32_t)0UL : (uint32_t)((PriorityGroupTmp - 7UL) + (uint32_t)(__NVIC_PRIO_BITS));
 
-  return (
-           ((PreemptPriority & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL)) << SubPriorityBits) |
-           ((SubPriority     & (uint32_t)((1UL << (SubPriorityBits    )) - 1UL)))
-         );
+    return (
+        ((PreemptPriority & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL)) << SubPriorityBits) |
+        ((SubPriority     & (uint32_t)((1UL << (SubPriorityBits)) - 1UL)))
+        );
 }
 
 
@@ -803,17 +802,17 @@ __STATIC_INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t P
   \param [out] pPreemptPriority  Preemptive priority value (starting from 0).
   \param [out]     pSubPriority  Subpriority value (starting from 0).
  */
-__STATIC_INLINE void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGroup, uint32_t* const pPreemptPriority, uint32_t* const pSubPriority)
+__STATIC_INLINE void NVIC_DecodePriority(uint32_t Priority, uint32_t PriorityGroup, uint32_t *const pPreemptPriority, uint32_t *const pSubPriority)
 {
-  uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t)0x07UL);   /* only values 0..7 are used          */
-  uint32_t PreemptPriorityBits;
-  uint32_t SubPriorityBits;
+    uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t)0x07UL);   /* only values 0..7 are used          */
+    uint32_t PreemptPriorityBits;
+    uint32_t SubPriorityBits;
 
-  PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
-  SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint32_t)0UL : (uint32_t)((PriorityGroupTmp - 7UL) + (uint32_t)(__NVIC_PRIO_BITS));
+    PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NVIC_PRIO_BITS) : (uint32_t)(7UL - PriorityGroupTmp);
+    SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint32_t)0UL : (uint32_t)((PriorityGroupTmp - 7UL) + (uint32_t)(__NVIC_PRIO_BITS));
 
-  *pPreemptPriority = (Priority >> SubPriorityBits) & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL);
-  *pSubPriority     = (Priority                   ) & (uint32_t)((1UL << (SubPriorityBits    )) - 1UL);
+    *pPreemptPriority = (Priority >> SubPriorityBits) & (uint32_t)((1UL << (PreemptPriorityBits)) - 1UL);
+    *pSubPriority     = (Priority) & (uint32_t)((1UL << (SubPriorityBits)) - 1UL);
 }
 
 
@@ -829,8 +828,8 @@ __STATIC_INLINE void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
  */
 __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
 {
-  uint32_t *vectors = (uint32_t *)0x0U;
-  vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET] = vector;
+    uint32_t *vectors = (uint32_t *)0x0U;
+    vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET] = vector;
 }
 
 
@@ -844,8 +843,8 @@ __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
  */
 __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
 {
-  uint32_t *vectors = (uint32_t *)0x0U;
-  return vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET];
+    uint32_t *vectors = (uint32_t *)0x0U;
+    return vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET];
 }
 
 
@@ -855,16 +854,16 @@ __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
  */
 __NO_RETURN __STATIC_INLINE void __NVIC_SystemReset(void)
 {
-  __DSB();                                                          /* Ensure all outstanding memory accesses included
+    __DSB();                                                        /* Ensure all outstanding memory accesses included
                                                                        buffered write are completed before reset */
-  SCB->AIRCR  = ((0x5FAUL << SCB_AIRCR_VECTKEY_Pos) |
-                 SCB_AIRCR_SYSRESETREQ_Msk);
-  __DSB();                                                          /* Ensure completion of memory access */
+    SCB->AIRCR  = ((0x5FAUL << SCB_AIRCR_VECTKEY_Pos) |
+                   SCB_AIRCR_SYSRESETREQ_Msk);
+    __DSB();                                                        /* Ensure completion of memory access */
 
-  for(;;)                                                           /* wait until reset */
-  {
-    __NOP();
-  }
+    for (;; )                                                       /* wait until reset */
+    {
+        __NOP();
+    }
 }
 
 /*@} end of CMSIS_Core_NVICFunctions */
@@ -919,18 +918,18 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void)
  */
 __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 {
-  if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
-  {
-    return (1UL);                                                   /* Reload value impossible */
-  }
+    if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
+    {
+        return (1UL);                                               /* Reload value impossible */
+    }
 
-  SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
-  NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
-  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
-  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
-                   SysTick_CTRL_TICKINT_Msk   |
-                   SysTick_CTRL_ENABLE_Msk;                         /* Enable SysTick IRQ and SysTick Timer */
-  return (0UL);                                                     /* Function successful */
+    SysTick->LOAD  = (uint32_t)(ticks - 1UL);                        /* set reload register */
+    NVIC_SetPriority(SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+    SysTick->VAL   = 0UL;                                            /* Load the SysTick Counter Value */
+    SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+        SysTick_CTRL_TICKINT_Msk   |
+        SysTick_CTRL_ENABLE_Msk;                                    /* Enable SysTick IRQ and SysTick Timer */
+    return (0UL);                                                   /* Function successful */
 }
 
 #endif

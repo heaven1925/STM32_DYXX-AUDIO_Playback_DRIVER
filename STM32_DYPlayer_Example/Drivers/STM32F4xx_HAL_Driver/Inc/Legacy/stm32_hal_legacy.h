@@ -1396,36 +1396,36 @@ extern "C" {
 #define ETH_MMCRFAECR          0x00000198U
 #define ETH_MMCRGUFCR          0x000001C4U
 
-#define ETH_MAC_TXFIFO_FULL                             0x02000000U  /* Tx FIFO full */
-#define ETH_MAC_TXFIFONOT_EMPTY                         0x01000000U  /* Tx FIFO not empty */
-#define ETH_MAC_TXFIFO_WRITE_ACTIVE                     0x00400000U  /* Tx FIFO write active */
-#define ETH_MAC_TXFIFO_IDLE                             0x00000000U  /* Tx FIFO read status: Idle */
-#define ETH_MAC_TXFIFO_READ                             0x00100000U  /* Tx FIFO read status: Read (transferring data to the MAC transmitter) */
-#define ETH_MAC_TXFIFO_WAITING                          0x00200000U  /* Tx FIFO read status: Waiting for TxStatus from MAC transmitter */
-#define ETH_MAC_TXFIFO_WRITING                          0x00300000U  /* Tx FIFO read status: Writing the received TxStatus or flushing the TxFIFO */
-#define ETH_MAC_TRANSMISSION_PAUSE                      0x00080000U  /* MAC transmitter in pause */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_IDLE            0x00000000U  /* MAC transmit frame controller: Idle */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING         0x00020000U  /* MAC transmit frame controller: Waiting for Status of previous frame or IFG/backoff period to be over */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF   0x00040000U  /* MAC transmit frame controller: Generating and transmitting a Pause control frame (in full duplex mode) */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING    0x00060000U  /* MAC transmit frame controller: Transferring input frame for transmission */
-#define ETH_MAC_MII_TRANSMIT_ACTIVE           0x00010000U  /* MAC MII transmit engine active */
-#define ETH_MAC_RXFIFO_EMPTY                  0x00000000U  /* Rx FIFO fill level: empty */
-#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U  /* Rx FIFO fill level: fill-level below flow-control de-activate threshold */
-#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U  /* Rx FIFO fill level: fill-level above flow-control activate threshold */
-#define ETH_MAC_RXFIFO_FULL                   0x00000300U  /* Rx FIFO fill level: full */
+#define ETH_MAC_TXFIFO_FULL                             0x02000000U /* Tx FIFO full */
+#define ETH_MAC_TXFIFONOT_EMPTY                         0x01000000U /* Tx FIFO not empty */
+#define ETH_MAC_TXFIFO_WRITE_ACTIVE                     0x00400000U /* Tx FIFO write active */
+#define ETH_MAC_TXFIFO_IDLE                             0x00000000U /* Tx FIFO read status: Idle */
+#define ETH_MAC_TXFIFO_READ                             0x00100000U /* Tx FIFO read status: Read (transferring data to the MAC transmitter) */
+#define ETH_MAC_TXFIFO_WAITING                          0x00200000U /* Tx FIFO read status: Waiting for TxStatus from MAC transmitter */
+#define ETH_MAC_TXFIFO_WRITING                          0x00300000U /* Tx FIFO read status: Writing the received TxStatus or flushing the TxFIFO */
+#define ETH_MAC_TRANSMISSION_PAUSE                      0x00080000U /* MAC transmitter in pause */
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_IDLE            0x00000000U /* MAC transmit frame controller: Idle */
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING         0x00020000U /* MAC transmit frame controller: Waiting for Status of previous frame or IFG/backoff period to be over */
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF   0x00040000U /* MAC transmit frame controller: Generating and transmitting a Pause control frame (in full duplex mode) */
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING    0x00060000U /* MAC transmit frame controller: Transferring input frame for transmission */
+#define ETH_MAC_MII_TRANSMIT_ACTIVE           0x00010000U           /* MAC MII transmit engine active */
+#define ETH_MAC_RXFIFO_EMPTY                  0x00000000U           /* Rx FIFO fill level: empty */
+#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U           /* Rx FIFO fill level: fill-level below flow-control de-activate threshold */
+#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U           /* Rx FIFO fill level: fill-level above flow-control activate threshold */
+#define ETH_MAC_RXFIFO_FULL                   0x00000300U           /* Rx FIFO fill level: full */
 #if defined(STM32F1)
 #else
-#define ETH_MAC_READCONTROLLER_IDLE           0x00000000U  /* Rx FIFO read controller IDLE state */
-#define ETH_MAC_READCONTROLLER_READING_DATA   0x00000020U  /* Rx FIFO read controller Reading frame data */
-#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U  /* Rx FIFO read controller Reading frame status (or time-stamp) */
+#define ETH_MAC_READCONTROLLER_IDLE           0x00000000U   /* Rx FIFO read controller IDLE state */
+#define ETH_MAC_READCONTROLLER_READING_DATA   0x00000020U   /* Rx FIFO read controller Reading frame data */
+#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U   /* Rx FIFO read controller Reading frame status (or time-stamp) */
 #endif
-#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U  /* Rx FIFO read controller Flushing the frame data and status */
-#define ETH_MAC_RXFIFO_WRITE_ACTIVE           0x00000010U  /* Rx FIFO write controller active */
-#define ETH_MAC_SMALL_FIFO_NOTACTIVE          0x00000000U  /* MAC small FIFO read / write controllers not active */
-#define ETH_MAC_SMALL_FIFO_READ_ACTIVE        0x00000002U  /* MAC small FIFO read controller active */
-#define ETH_MAC_SMALL_FIFO_WRITE_ACTIVE       0x00000004U  /* MAC small FIFO write controller active */
-#define ETH_MAC_SMALL_FIFO_RW_ACTIVE          0x00000006U  /* MAC small FIFO read / write controllers active */
-#define ETH_MAC_MII_RECEIVE_PROTOCOL_ACTIVE   0x00000001U  /* MAC MII receive protocol engine active */
+#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U   /* Rx FIFO read controller Flushing the frame data and status */
+#define ETH_MAC_RXFIFO_WRITE_ACTIVE           0x00000010U   /* Rx FIFO write controller active */
+#define ETH_MAC_SMALL_FIFO_NOTACTIVE          0x00000000U   /* MAC small FIFO read / write controllers not active */
+#define ETH_MAC_SMALL_FIFO_READ_ACTIVE        0x00000002U   /* MAC small FIFO read controller active */
+#define ETH_MAC_SMALL_FIFO_WRITE_ACTIVE       0x00000004U   /* MAC small FIFO write controller active */
+#define ETH_MAC_SMALL_FIFO_RW_ACTIVE          0x00000006U   /* MAC small FIFO read / write controllers active */
+#define ETH_MAC_MII_RECEIVE_PROTOCOL_ACTIVE   0x00000001U   /* MAC MII receive protocol engine active */
 
 /**
   * @}
@@ -1448,8 +1448,8 @@ extern "C" {
   */
 
 #if defined(STM32L4) || defined(STM32F7) || defined(STM32F427xx) || defined(STM32F437xx) \
-  || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
-  || defined(STM32H7)
+    || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
+    || defined(STM32H7)
 /** @defgroup HAL_DMA2D_Aliased_Defines HAL DMA2D Aliased Defines maintained for legacy purpose
   * @{
   */
@@ -1476,8 +1476,8 @@ extern "C" {
 #endif  /* STM32L4 ||  STM32F7 ||  STM32F4 ||  STM32H7 */
 
 #if defined(STM32L4) || defined(STM32F7) || defined(STM32F427xx) || defined(STM32F437xx) \
-  || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
-  || defined(STM32H7) || defined(STM32U5)
+    || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
+    || defined(STM32H7) || defined(STM32U5)
 /** @defgroup DMA2D_Aliases DMA2D API Aliases
   * @{
   */
@@ -1524,7 +1524,7 @@ extern "C" {
 /** @defgroup HASH_alias HASH API alias
   * @{
   */
-#define HAL_HASHEx_IRQHandler   HAL_HASH_IRQHandler  /*!< Redirection for compatibility with legacy code */
+#define HAL_HASHEx_IRQHandler   HAL_HASH_IRQHandler   /*!< Redirection for compatibility with legacy code */
 /**
   *
   * @}
@@ -1589,17 +1589,17 @@ extern "C" {
 #define HAL_DisableDBGStopMode HAL_DBGMCU_DisableDBGStopMode
 #define HAL_EnableDBGStandbyMode HAL_DBGMCU_EnableDBGStandbyMode
 #define HAL_DisableDBGStandbyMode HAL_DBGMCU_DisableDBGStandbyMode
-#define HAL_DBG_LowPowerConfig(Periph, cmd) (((cmd\
-                                              )==ENABLE)? HAL_DBGMCU_DBG_EnableLowPowerConfig(Periph) : HAL_DBGMCU_DBG_DisableLowPowerConfig(Periph))
+#define HAL_DBG_LowPowerConfig(Periph, cmd) (((cmd \
+                                               ) == ENABLE) ? HAL_DBGMCU_DBG_EnableLowPowerConfig(Periph) : HAL_DBGMCU_DBG_DisableLowPowerConfig(Periph))
 #define HAL_VREFINT_OutputSelect  HAL_SYSCFG_VREFINT_OutputSelect
-#define HAL_Lock_Cmd(cmd) (((cmd)==ENABLE) ? HAL_SYSCFG_Enable_Lock_VREFINT() : HAL_SYSCFG_Disable_Lock_VREFINT())
+#define HAL_Lock_Cmd(cmd) (((cmd) == ENABLE) ? HAL_SYSCFG_Enable_Lock_VREFINT() : HAL_SYSCFG_Disable_Lock_VREFINT())
 #if defined(STM32L0)
 #else
-#define HAL_VREFINT_Cmd(cmd) (((cmd)==ENABLE)? HAL_SYSCFG_EnableVREFINT() : HAL_SYSCFG_DisableVREFINT())
+#define HAL_VREFINT_Cmd(cmd) (((cmd) == ENABLE) ? HAL_SYSCFG_EnableVREFINT() : HAL_SYSCFG_DisableVREFINT())
 #endif
-#define HAL_ADC_EnableBuffer_Cmd(cmd)  (((cmd)==ENABLE) ? HAL_ADCEx_EnableVREFINT() : HAL_ADCEx_DisableVREFINT())
-#define HAL_ADC_EnableBufferSensor_Cmd(cmd) (((cmd\
-                                              )==ENABLE) ?  HAL_ADCEx_EnableVREFINTTempSensor() : HAL_ADCEx_DisableVREFINTTempSensor())
+#define HAL_ADC_EnableBuffer_Cmd(cmd)  (((cmd) == ENABLE) ? HAL_ADCEx_EnableVREFINT() : HAL_ADCEx_DisableVREFINT())
+#define HAL_ADC_EnableBufferSensor_Cmd(cmd) (((cmd \
+                                               ) == ENABLE) ?  HAL_ADCEx_EnableVREFINTTempSensor() : HAL_ADCEx_DisableVREFINTTempSensor())
 #if defined(STM32H7A3xx) || defined(STM32H7B3xx) || defined(STM32H7B0xx) || defined(STM32H7A3xxQ) || defined(STM32H7B3xxQ) || defined(STM32H7B0xxQ)
 #define HAL_EnableSRDomainDBGStopMode      HAL_EnableDomain3DBGStopMode
 #define HAL_DisableSRDomainDBGStopMode     HAL_DisableDomain3DBGStopMode
@@ -1634,8 +1634,8 @@ extern "C" {
 #define HAL_FMPI2CEx_AnalogFilter_Config      HAL_FMPI2CEx_ConfigAnalogFilter
 #define HAL_FMPI2CEx_DigitalFilter_Config     HAL_FMPI2CEx_ConfigDigitalFilter
 
-#define HAL_I2CFastModePlusConfig(SYSCFG_I2CFastModePlus, cmd) (((cmd\
-                                                                 )==ENABLE)? HAL_I2CEx_EnableFastModePlus(SYSCFG_I2CFastModePlus): HAL_I2CEx_DisableFastModePlus(SYSCFG_I2CFastModePlus))
+#define HAL_I2CFastModePlusConfig(SYSCFG_I2CFastModePlus, cmd) (((cmd \
+                                                                  ) == ENABLE) ? HAL_I2CEx_EnableFastModePlus(SYSCFG_I2CFastModePlus) : HAL_I2CEx_DisableFastModePlus(SYSCFG_I2CFastModePlus))
 
 #if defined(STM32H7) || defined(STM32WB) || defined(STM32G0) || defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3) || defined(STM32F4) || defined(STM32F7) || defined(STM32L0) || defined(STM32L4) || defined(STM32L5) || defined(STM32G4) || defined(STM32L1)
 #define HAL_I2C_Master_Sequential_Transmit_IT  HAL_I2C_Master_Seq_Transmit_IT
@@ -1643,7 +1643,7 @@ extern "C" {
 #define HAL_I2C_Slave_Sequential_Transmit_IT   HAL_I2C_Slave_Seq_Transmit_IT
 #define HAL_I2C_Slave_Sequential_Receive_IT    HAL_I2C_Slave_Seq_Receive_IT
 #endif /* STM32H7 || STM32WB  || STM32G0 || STM32F0 || STM32F1 || STM32F2 || STM32F3 || STM32F4 || STM32F7 || STM32L0 || STM32L4 || STM32L5 || STM32G4 || STM32L1 */
-#if defined(STM32H7) || defined(STM32WB) || defined(STM32G0) || defined(STM32F4) || defined(STM32F7) || defined(STM32L0) || defined(STM32L4) || defined(STM32L5) || defined(STM32G4)|| defined(STM32L1)
+#if defined(STM32H7) || defined(STM32WB) || defined(STM32G0) || defined(STM32F4) || defined(STM32F7) || defined(STM32L0) || defined(STM32L4) || defined(STM32L5) || defined(STM32G4) || defined(STM32L1)
 #define HAL_I2C_Master_Sequential_Transmit_DMA HAL_I2C_Master_Seq_Transmit_DMA
 #define HAL_I2C_Master_Sequential_Receive_DMA  HAL_I2C_Master_Seq_Receive_DMA
 #define HAL_I2C_Slave_Sequential_Transmit_DMA  HAL_I2C_Slave_Seq_Transmit_DMA
@@ -2194,7 +2194,7 @@ extern "C" {
                                                           ((__FLAG__)  == COMP_EXTI_LINE_COMP6) ? __HAL_COMP_COMP6_EXTI_CLEAR_FLAG() : \
                                                           __HAL_COMP_COMP7_EXTI_CLEAR_FLAG())
 # endif
-# if defined(STM32F373xC) ||defined(STM32F378xx)
+# if defined(STM32F373xC) || defined(STM32F378xx)
 #define __HAL_COMP_EXTI_RISING_IT_ENABLE(__EXTILINE__)   (((__EXTILINE__)  == COMP_EXTI_LINE_COMP1) ? __HAL_COMP_COMP1_EXTI_ENABLE_RISING_EDGE() : \
                                                           __HAL_COMP_COMP2_EXTI_ENABLE_RISING_EDGE())
 #define __HAL_COMP_EXTI_RISING_IT_DISABLE(__EXTILINE__)  (((__EXTILINE__)  == COMP_EXTI_LINE_COMP1) ? __HAL_COMP_COMP1_EXTI_DISABLE_RISING_EDGE() : \
@@ -2248,8 +2248,8 @@ extern "C" {
 /** @defgroup HAL_COMP_Aliased_Functions HAL COMP Aliased Functions maintained for legacy purpose
   * @{
   */
-#define HAL_COMP_Start_IT       HAL_COMP_Start /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
-#define HAL_COMP_Stop_IT        HAL_COMP_Stop  /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
+#define HAL_COMP_Start_IT       HAL_COMP_Start  /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
+#define HAL_COMP_Stop_IT        HAL_COMP_Stop   /* Function considered as legacy as EXTI event or IT configuration is done into HAL_COMP_Init() */
 /**
   * @}
   */
@@ -2260,7 +2260,7 @@ extern "C" {
   */
 
 #define IS_DAC_WAVE(WAVE) (((WAVE) == DAC_WAVE_NONE) || \
-                           ((WAVE) == DAC_WAVE_NOISE)|| \
+                           ((WAVE) == DAC_WAVE_NOISE) || \
                            ((WAVE) == DAC_WAVE_TRIANGLE))
 
 /**
@@ -2408,7 +2408,7 @@ extern "C" {
 #define __HAL_PWR_INTERNALWAKEUP_ENABLE                          HAL_PWREx_EnableInternalWakeUpLine
 #define __HAL_PWR_PULL_UP_DOWN_CONFIG_DISABLE                    HAL_PWREx_DisablePullUpPullDownConfig
 #define __HAL_PWR_PULL_UP_DOWN_CONFIG_ENABLE                     HAL_PWREx_EnablePullUpPullDownConfig
-#define __HAL_PWR_PVD_EXTI_CLEAR_EGDE_TRIGGER()                  do { __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();__HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE(); } while(0)
+#define __HAL_PWR_PVD_EXTI_CLEAR_EGDE_TRIGGER()                  do {__HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE(); __HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE(); } while (0)
 #define __HAL_PWR_PVD_EXTI_EVENT_DISABLE                         __HAL_PWR_PVD_EXTI_DISABLE_EVENT
 #define __HAL_PWR_PVD_EXTI_EVENT_ENABLE                          __HAL_PWR_PVD_EXTI_ENABLE_EVENT
 #define __HAL_PWR_PVD_EXTI_FALLINGTRIGGER_DISABLE                __HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE
@@ -2417,8 +2417,8 @@ extern "C" {
 #define __HAL_PWR_PVD_EXTI_RISINGTRIGGER_ENABLE                  __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE
 #define __HAL_PWR_PVD_EXTI_SET_FALLING_EGDE_TRIGGER              __HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE
 #define __HAL_PWR_PVD_EXTI_SET_RISING_EDGE_TRIGGER               __HAL_PWR_PVD_EXTI_ENABLE_RISING_EDGE
-#define __HAL_PWR_PVM_DISABLE()                                  do { HAL_PWREx_DisablePVM1();HAL_PWREx_DisablePVM2();HAL_PWREx_DisablePVM3();HAL_PWREx_DisablePVM4(); } while(0)
-#define __HAL_PWR_PVM_ENABLE()                                   do { HAL_PWREx_EnablePVM1();HAL_PWREx_EnablePVM2();HAL_PWREx_EnablePVM3();HAL_PWREx_EnablePVM4(); } while(0)
+#define __HAL_PWR_PVM_DISABLE()                                  do {HAL_PWREx_DisablePVM1(); HAL_PWREx_DisablePVM2(); HAL_PWREx_DisablePVM3(); HAL_PWREx_DisablePVM4(); } while (0)
+#define __HAL_PWR_PVM_ENABLE()                                   do {HAL_PWREx_EnablePVM1(); HAL_PWREx_EnablePVM2(); HAL_PWREx_EnablePVM3(); HAL_PWREx_EnablePVM4(); } while (0)
 #define __HAL_PWR_SRAM2CONTENT_PRESERVE_DISABLE                  HAL_PWREx_DisableSRAM2ContentRetention
 #define __HAL_PWR_SRAM2CONTENT_PRESERVE_ENABLE                   HAL_PWREx_EnableSRAM2ContentRetention
 #define __HAL_PWR_VDDIO2_DISABLE                                 HAL_PWREx_DisableVddIO2
@@ -2454,8 +2454,8 @@ extern "C" {
 #define RCC_StopWakeUpClock_HSI     RCC_STOP_WAKEUPCLOCK_HSI
 
 #define HAL_RCC_CCSCallback HAL_RCC_CSSCallback
-#define HAL_RC48_EnableBuffer_Cmd(cmd) (((cmd\
-                                         )==ENABLE) ? HAL_RCCEx_EnableHSI48_VREFINT() : HAL_RCCEx_DisableHSI48_VREFINT())
+#define HAL_RC48_EnableBuffer_Cmd(cmd) (((cmd \
+                                          ) == ENABLE) ? HAL_RCCEx_EnableHSI48_VREFINT() : HAL_RCCEx_DisableHSI48_VREFINT())
 
 #define __ADC_CLK_DISABLE          __HAL_RCC_ADC_CLK_DISABLE
 #define __ADC_CLK_ENABLE           __HAL_RCC_ADC_CLK_ENABLE
@@ -2954,7 +2954,7 @@ extern "C" {
 #define __HAL_RCC_WWDG_CLK_SLEEP_ENABLE  __HAL_RCC_WWDG1_CLK_SLEEP_ENABLE
 
 #define __HAL_RCC_WWDG_FORCE_RESET    ((void)0U)  /* Not available on the STM32H7*/
-#define __HAL_RCC_WWDG_RELEASE_RESET ((void)0U) /* Not available on the STM32H7*/
+#define __HAL_RCC_WWDG_RELEASE_RESET ((void)0U)   /* Not available on the STM32H7*/
 
 
 #define  __HAL_RCC_WWDG_IS_CLK_ENABLED    __HAL_RCC_WWDG1_IS_CLK_ENABLED
@@ -3584,7 +3584,7 @@ extern "C" {
 /** @defgroup HAL_RTC_Aliased_Macros HAL RTC Aliased Macros maintained for legacy purpose
   * @{
   */
-#if defined (STM32G0) || defined (STM32L5) || defined (STM32L412xx) || defined (STM32L422xx) || defined (STM32L4P5xx)|| \
+#if defined (STM32G0) || defined (STM32L5) || defined (STM32L412xx) || defined (STM32L422xx) || defined (STM32L4P5xx) || \
     defined (STM32L4Q5xx) || defined (STM32G4) || defined (STM32WL) || defined (STM32U5) || \
     defined (STM32C0)
 #else

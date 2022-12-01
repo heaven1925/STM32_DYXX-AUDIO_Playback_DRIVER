@@ -9,7 +9,7 @@
 ********************************************************************************/
 /************************************DEFINES***********************************/
 
-#define  DYPLAYERUART		&huart4 /* &huartx */
+#define  DYPLAYERUART       &huart4   /* &huartx */
 
 /************************************INCLUDES***********************************/
 #include "DYPlayer.h"
@@ -21,78 +21,78 @@
  * Method pointer struct implementation
  */
 const DYPlayer_st DYPlayer    = {
-	serialWrite					,
-	serialWrite_crc				,
-	serialRead					,
-	checkPlayState			    ,
-	play					    ,
-	pause					    ,
-	stop					    ,
-	previous				    ,
-	next					    ,
-	playSpecified			    ,
-	playSpecifiedDevicePath     ,
-	getPlayingDevice		    ,
-	setPlayingDevice		    ,
-	getSoundCount			    ,
-	getPlayingSound		        ,
-	previousDir			        ,
-	getFirstInDir			    ,
-	getSoundCountDir		    ,
-	setVolume				    ,
-	volumeIncrease			    ,
-	volumeDecrease			    ,
-	interludeSpecified		    ,
-	interludeSpecifiedDevicePath,
-	stopInterlude				,
-	setCycleMode				,
-	setCycleTimes				,
-	setEq						,
-	select						,
-	combinationPlay				,
-	endCombinationPlay			,
-	checksum					,
-	validateCrc					,
-	sendCommand_nocrc			,
-	sendCommand					,
-	getResponse					,
-	byPathCommand				,
+    serialWrite,
+    serialWrite_crc,
+    serialRead,
+    checkPlayState,
+    play,
+    pause,
+    stop,
+    previous,
+    next,
+    playSpecified,
+    playSpecifiedDevicePath,
+    getPlayingDevice,
+    setPlayingDevice,
+    getSoundCount,
+    getPlayingSound,
+    previousDir,
+    getFirstInDir,
+    getSoundCountDir,
+    setVolume,
+    volumeIncrease,
+    volumeDecrease,
+    interludeSpecified,
+    interludeSpecifiedDevicePath,
+    stopInterlude,
+    setCycleMode,
+    setCycleTimes,
+    setEq,
+    select,
+    combinationPlay,
+    endCombinationPlay,
+    checksum,
+    validateCrc,
+    sendCommand_nocrc,
+    sendCommand,
+    getResponse,
+    byPathCommand,
 };
 
 /******************************************************************************/
 
-const uint8_t controlCommands[ SIZEOF_COMMANDS ][ LENGTHOF_COMMANDS + LENGTHOF_CRC ] = {
-/************************************* control commands *********************************************/
-/* PLAY_CMD 		 :0  */{ COMMANDCODE , 0x02 , 0x00 , 0xAC } , /* play			                */
-/* PAUSE_CMD	 	 :1  */{ COMMANDCODE , 0x03 , 0x00 , 0xAD } , /* pause			                */
-/* STOP_CMD	 		 :2  */{ COMMANDCODE , 0x04 , 0x00 , 0xAE } , /* stop			                */
-/* PREV_CMD			 :3  */{ COMMANDCODE , 0x05 , 0x00 , 0xAF } , /* previous		                */
-/* NEXT_CMD			 :4  */{ COMMANDCODE , 0x06 , 0x00 , 0xB0 } , /* next			                */
-/* VOLUME_INC		 :5  */{ COMMANDCODE , 0x14 , 0x00 , 0xBE } , /* volume + 		                */
-/* VOLUME_DEC		 :6  */{ COMMANDCODE , 0x15 , 0x00 , 0xBF } , /* volume -  	                	*/
-/* PREV_FILE		 :7  */{ COMMANDCODE , 0x0E , 0x00 , 0xB8 } , /* prev file		                */
-/* NEXT_FILE		 :8  */{ COMMANDCODE , 0x0F , 0x00 , 0xB9 } , /* next file 	                	*/
-/* STOP_PLAYING		 :9  */{ COMMANDCODE , 0x10 , 0x00 , 0xBA } , /* stop playying	                */
-/************************************* query commands ***********************************************/
-/* QPLAY_CMD		 :10 */{ COMMANDCODE , 0x01 , 0x00 , 0xAB } , /* Query play status				*/
-/* QCURRENTDEV_CMD	 :11 */{ COMMANDCODE , 0x09 , 0x00 , 0xB3 } , /* Query current online device 	*/
-/* QCURRENTPLAY_CMD	 :12 */{ COMMANDCODE , 0x0A , 0x00 , 0xB4 } , /* Query current play drive 		*/
-/* QNUMBEROFSONG_CMD :13 */{ COMMANDCODE , 0x0C , 0x00 , 0xB6 } , /* Query number of songs			*/
-/* QCURRENTSONG_CMD	 :14 */{ COMMANDCODE , 0x0D , 0x00 , 0xB7 } , /* Query current song				*/
-/* QFOLDERDIR_CMD	 :15 */{ COMMANDCODE , 0x11 , 0x00 , 0xBB } , /* Query folder dir song			*/
-/* QFOLDERNUMBER_CMD :16 */{ COMMANDCODE , 0x12 , 0x00 , 0xBC } , /* Query folder # of song 		*/
-/********************************** settings commands ***********************************************/
-/* SETVOLUME_CMD 	 :17 */{ COMMANDCODE , 0x13 , 0x01 , RFU  } , /* SetVolume 						*/
-/* SETLOOPMODE_CMD   :18 */{ COMMANDCODE , 0x18 , 0x01 , RFU  } , /* SetLoop Mode					*/
-/* SETCYCTIMES_CMD   :19 */{ COMMANDCODE , 0x19 , 0x02 , RFU  } , /* SetCycleTime H[3]:L[4]			*/
-/* SETEQ_CMD 		 :20 */{ COMMANDCODE , 0x1A , 0x01 , RFU  } , /* Set EQ							*/
-/* SPECIFIEDSONG_CMD :21 */{ COMMANDCODE , 0x07 , 0x02 , RFU  } , /* SpecifiedSong L[3]:D[4]:P[5]	*/
-/* SPECIFIEDPATH_CMD :22 */{ COMMANDCODE , 0x08 , RFU  , RFU  } , /* SpecifiedPath					*/
-/* SWTICHDRIVE_CMD 	 :23 */{ COMMANDCODE , 0x0B , 0x01 , RFU  } , /* Switch Specified Drive			*/
-/* SPECSONGINTER_CMD :24 */{ COMMANDCODE , 0x16 , 0x03 , RFU  } , /* Specified song to be interplay	*/
-/* SPECPATHINTER_CMD :25 */{ COMMANDCODE , 0x17 , RFU  , RFU  } , /* Specified path to be interplay	*/
-/* SLCTBUTNOPLAY_CMD :26 */{ COMMANDCODE , 0x1F , 0x02 , RFU  } , /* Select But no play				*/
-/****************************************************************************************************/
+const uint8_t controlCommands[SIZEOF_COMMANDS][LENGTHOF_COMMANDS + LENGTHOF_CRC] = {
+    /************************************* control commands *********************************************/
+    /* PLAY_CMD                  :0  */ {COMMANDCODE, 0x02, 0x00, 0xAC}, /* play			                */
+    /* PAUSE_CMD	         :1  */{COMMANDCODE, 0x03, 0x00, 0xAD}, /* pause			                */
+    /* STOP_CMD	                 :2  */ {COMMANDCODE, 0x04, 0x00, 0xAE}, /* stop			                */
+    /* PREV_CMD			 :3  */{COMMANDCODE, 0x05, 0x00, 0xAF}, /* previous		                */
+    /* NEXT_CMD			 :4  */{COMMANDCODE, 0x06, 0x00, 0xB0}, /* next			                */
+    /* VOLUME_INC		 :5  */{COMMANDCODE, 0x14, 0x00, 0xBE}, /* volume +                             */
+    /* VOLUME_DEC		 :6  */{COMMANDCODE, 0x15, 0x00, 0xBF}, /* volume -                             */
+    /* PREV_FILE		 :7  */{COMMANDCODE, 0x0E, 0x00, 0xB8}, /* prev file		                */
+    /* NEXT_FILE		 :8  */{COMMANDCODE, 0x0F, 0x00, 0xB9}, /* next file                            */
+    /* STOP_PLAYING		 :9  */{COMMANDCODE, 0x10, 0x00, 0xBA}, /* stop playying	                */
+    /************************************* query commands ***********************************************/
+    /* QPLAY_CMD		 :10 */{COMMANDCODE, 0x01, 0x00, 0xAB}, /* Query play status				*/
+    /* QCURRENTDEV_CMD	 :11 */{COMMANDCODE, 0x09, 0x00, 0xB3},  /* Query current online device        */
+    /* QCURRENTPLAY_CMD	 :12 */ {COMMANDCODE, 0x0A, 0x00, 0xB4}, /* Query current play drive           */
+    /* QNUMBEROFSONG_CMD :13 */ {COMMANDCODE, 0x0C, 0x00, 0xB6}, /* Query number of songs			*/
+    /* QCURRENTSONG_CMD	 :14 */ {COMMANDCODE, 0x0D, 0x00, 0xB7}, /* Query current song				*/
+    /* QFOLDERDIR_CMD	 :15 */{COMMANDCODE, 0x11, 0x00, 0xBB},   /* Query folder dir song			*/
+    /* QFOLDERNUMBER_CMD :16 */ {COMMANDCODE, 0x12, 0x00, 0xBC}, /* Query folder # of song             */
+    /********************************** settings commands ***********************************************/
+    /* SETVOLUME_CMD     :17 */ {COMMANDCODE, 0x13, 0x01, RFU},         /* SetVolume                                          */
+    /* SETLOOPMODE_CMD   :18 */ {COMMANDCODE, 0x18, 0x01, RFU},         /* SetLoop Mode					*/
+    /* SETCYCTIMES_CMD   :19 */ {COMMANDCODE, 0x19, 0x02, RFU},         /* SetCycleTime H[3]:L[4]			*/
+    /* SETEQ_CMD                 :20 */ {COMMANDCODE, 0x1A, 0x01, RFU}, /* Set EQ							*/
+    /* SPECIFIEDSONG_CMD :21 */ {COMMANDCODE, 0x07, 0x02, RFU},         /* SpecifiedSong L[3]:D[4]:P[5]	*/
+    /* SPECIFIEDPATH_CMD :22 */ {COMMANDCODE, 0x08, RFU, RFU},          /* SpecifiedPath					*/
+    /* SWTICHDRIVE_CMD   :23 */ {COMMANDCODE, 0x0B, 0x01, RFU},         /* Switch Specified Drive			*/
+    /* SPECSONGINTER_CMD :24 */ {COMMANDCODE, 0x16, 0x03, RFU},         /* Specified song to be interplay	*/
+    /* SPECPATHINTER_CMD :25 */ {COMMANDCODE, 0x17, RFU, RFU},          /* Specified path to be interplay	*/
+    /* SLCTBUTNOPLAY_CMD :26 */ {COMMANDCODE, 0x1F, 0x02, RFU},         /* Select But no play				*/
+    /****************************************************************************************************/
 };
 
 /******************************************************************************/
@@ -105,9 +105,7 @@ const uint8_t controlCommands[ SIZEOF_COMMANDS ][ LENGTHOF_COMMANDS + LENGTHOF_C
   @brief   : Virtual method that should implement writing from the module via UART.
 ********************************************************************************/
 void serialWrite(const uint8_t *buffer, uint8_t len) {
-     
-	HAL_UART_Transmit(DYPLAYERUART , &buffer[0] , len , 100 );
-	
+    HAL_UART_Transmit(DYPLAYERUART, &buffer[0], len, 100);
 }
 /*******************************************************************************
   @func    : serialWrite_crc
@@ -118,11 +116,10 @@ void serialWrite(const uint8_t *buffer, uint8_t len) {
              length 1. That buffer has crc value
 ********************************************************************************/
 void serialWrite_crc(uint8_t crc) {
-       
-	uint8_t buf[1];
-	buf[0] = crc;
-		
-    HAL_UART_Transmit(DYPLAYERUART, &buf[0] , 1 , 100);
+    uint8_t buf[1];
+    buf[0] = crc;
+
+    HAL_UART_Transmit(DYPLAYERUART, &buf[0], 1, 100);
 }
 /*******************************************************************************
   @func    : serialRead
@@ -132,8 +129,7 @@ void serialWrite_crc(uint8_t crc) {
   @brief   : Virtual method that should implement reading from the module via UART.
 ********************************************************************************/
 uint8_t serialRead(uint8_t *buffer, uint8_t len) {
-
-	HAL_UART_Receive(DYPLAYERUART, &buffer[0], len, 100);
+    HAL_UART_Receive(DYPLAYERUART, &buffer[0], len, 100);
 
     return true;
 }
@@ -146,8 +142,8 @@ uint8_t serialRead(uint8_t *buffer, uint8_t len) {
 ********************************************************************************/
 uint8_t  checksum(uint8_t *data, uint8_t len) {
     uint8_t sum = 0;
-    for (uint8_t i=0; i < len; i++) {
-      sum = sum + data[i];
+    for (uint8_t i = 0; i < len; i++) {
+        sum = sum + data[i];
     }
     return sum;
 }
@@ -170,7 +166,6 @@ bool validateCrc(uint8_t *data, uint8_t len) {
   @brief   : Send a command to the module, adds a CRC to the passed buffer.
 ********************************************************************************/
 void sendCommand_nocrc(uint8_t *data, uint8_t len) {
-
     uint8_t crc = checksum(data, len);
     serialWrite(data, len);
     serialWrite_crc(crc);
@@ -182,7 +177,7 @@ void sendCommand_nocrc(uint8_t *data, uint8_t len) {
   @date	   : 30.11.22
   @brief   : data pointer to bytes to send to the module.
 ********************************************************************************/
-void sendCommand (const uint8_t *data, uint8_t len, uint8_t crc) {
+void sendCommand(const uint8_t *data, uint8_t len, uint8_t crc) {
     serialWrite(data, len);
     serialWrite_crc(crc);
 }
@@ -192,13 +187,13 @@ void sendCommand (const uint8_t *data, uint8_t len, uint8_t crc) {
   @return  : bool
   @date	   : 30.11.22
   @brief   : Get a response to a command.
-        	 Reads data from UART, validates the CRC, and puts it in the buffer.
+             Reads data from UART, validates the CRC, and puts it in the buffer.
 ********************************************************************************/
 bool getResponse(uint8_t *buffer, uint8_t len) {
     if (serialRead(buffer, len) > 0) {
-      if (DYPlayer.validateCrc(buffer, len)) {
-        return true;
-      }
+        if (DYPlayer.validateCrc(buffer, len)) {
+            return true;
+        }
     }
     return false;
 }
@@ -223,34 +218,34 @@ void byPathCommand(uint8_t command, device_t device, char *path) {
     uint8_t _len = len;
     // Count / in path and, except root slash and determine new length
     for (uint8_t i = 1; i < len; i++) {
-      if (path[i] == '/')
-        _len++;
+        if (path[i] == '/')
+            _len++;
     }
     #ifdef DY_PATHS_IN_HEAP
     uint8_t *_command = new uint8_t[_len + 4];
     #else
-    uint8_t _command[DY_PATH_LEN+4];
+    uint8_t _command[DY_PATH_LEN + 4];
     #endif
 
     _command[0] = 0xaa;
     _command[1] = command;
     _command[2] = _len + 1;
-    _command[3] = (uint8_t) device;
+    _command[3] = (uint8_t)device;
     _command[4] = path[0];
     uint8_t j = 5;
     for (uint8_t i = 1; i < len; i++) {
-      switch(path[i]) {
-        case '.':
-          _command[j] = '*';
-          break;
-        case '/':
-          _command[j] = '*';
-          j++;
-          // fall-through
-        default:
-          _command[j] = toupper(path[i]);
-      }
-      j++;
+        switch (path[i]) {
+            case '.':
+                _command[j] = '*';
+                break;
+            case '/':
+                _command[j] = '*';
+                j++;
+            // fall-through
+            default:
+                _command[j] = toupper(path[i]);
+        }
+        j++;
     }
     sendCommand_nocrc(_command, len + 4);
     #ifdef DY_PATHS_IN_HEAP
@@ -265,21 +260,21 @@ void byPathCommand(uint8_t command, device_t device, char *path) {
   @brief   : Check the current play state can, be called at any time.
 ********************************************************************************/
 play_state_t checkPlayState(void) {
-	/*
+    /*
     uint8_t command[3] = { 0xaa, 0x01, 0x00 };
      sendCommand(command, 3, 0xab);
     */
 
-    sendCommand( &controlCommands[QPLAY_CMD][0]            ,
-    			 LENGTHOF_COMMANDS				  		  ,
-				 controlCommands[QPLAY_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QPLAY_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QPLAY_CMD][CMD_CRC_INDEX]);
 
     uint8_t buffer[6];
     if (DYPlayer.getResponse(buffer, 6)) {
-      return (play_state_t) buffer[3];
+        return (play_state_t)buffer[3];
     }
-    //return (play_state_t) PlayState.Fail;
-    return Fail; //Fudge
+    // return (play_state_t) PlayState.Fail;
+    return Fail;   // Fudge
 }
 /*******************************************************************************
   @func    : play
@@ -289,13 +284,13 @@ play_state_t checkPlayState(void) {
   @brief   : Play the currently selected file from the start.
 ********************************************************************************/
 void play(void) {
-	/*
+    /*
     uint8_t command[3] = {0xaa, 0x02, 0x00};
     */
 
-    sendCommand( &controlCommands[PLAY_CMD][0]            ,
-    			 LENGTHOF_COMMANDS				  		  ,
-				 controlCommands[PLAY_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[PLAY_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[PLAY_CMD][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : pause
@@ -305,14 +300,13 @@ void play(void) {
   @brief   : Set the play state to paused.
 ********************************************************************************/
 void pause() {
-	/*
+    /*
     uint8_t command[3] = {0xaa, 0x03, 0x00};
     */
 
-    sendCommand( &controlCommands[PAUSE_CMD][0]            ,
-    			 LENGTHOF_COMMANDS				  		   ,
-				 controlCommands[PAUSE_CMD][CMD_CRC_INDEX] );
-
+    sendCommand(&controlCommands[PAUSE_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[PAUSE_CMD][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : stop
@@ -322,13 +316,13 @@ void pause() {
   @brief   : Set the play state to stopped.
 ********************************************************************************/
 void stop() {
-  /*
-  uint8_t command[3] = {0xaa, 0x04, 0x00};
-  */
+    /*
+    uint8_t command[3] = {0xaa, 0x04, 0x00};
+    */
 
-    sendCommand( &controlCommands[STOP_CMD][0]            ,
-    			 LENGTHOF_COMMANDS				  		  ,
-				 controlCommands[STOP_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[STOP_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[STOP_CMD][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : previous
@@ -338,12 +332,12 @@ void stop() {
   @brief   : Play the previous file.
 ********************************************************************************/
 void previous() {
-  /*
-  uint8_t command[3] = {0xaa, 0x05, 0x00};
-  */
-    sendCommand( &controlCommands[PREV_CMD][0]             ,
-    			 LENGTHOF_COMMANDS				  		   ,
-				 controlCommands[PREV_CMD][CMD_CRC_INDEX] );
+    /*
+    uint8_t command[3] = {0xaa, 0x05, 0x00};
+    */
+    sendCommand(&controlCommands[PREV_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[PREV_CMD][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : next
@@ -353,13 +347,13 @@ void previous() {
   @brief   : Play the next file.
 ********************************************************************************/
 void next() {
-  /*
-  uint8_t command[3] = {0xaa, 0x06, 0x00};
-  */
+    /*
+    uint8_t command[3] = {0xaa, 0x06, 0x00};
+    */
 
-    sendCommand( &controlCommands[PREV_CMD][0]             ,
-    			 LENGTHOF_COMMANDS				  		   ,
-				 controlCommands[PREV_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[PREV_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[PREV_CMD][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : playSpecified
@@ -369,18 +363,18 @@ void next() {
   @brief   :
 ********************************************************************************/
 void playSpecified(uint16_t number) {
-  /*
-  uint8_t command[5] = { 0xaa, 0x07, 0x02, 0x00, 0x00 };
-  */
-  uint8_t command[5] = {0};
+    /*
+    uint8_t command[5] = { 0xaa, 0x07, 0x02, 0x00, 0x00 };
+    */
+    uint8_t command[5] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SPECIFIEDSONG_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SPECIFIEDSONG_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = number >> 8;
-  command[4] = number & 0xff;
-  sendCommand_nocrc(command, 5);
+    command[3] = number >> 8;
+    command[4] = number & 0xff;
+    sendCommand_nocrc(command, 5);
 }
 /*******************************************************************************
   @func    : playSpecifiedDevicePath
@@ -390,7 +384,7 @@ void playSpecified(uint16_t number) {
   @brief   : Play a sound file by number, number sent as 2 bytes.
 ********************************************************************************/
 void playSpecifiedDevicePath(device_t device, char *path) {
-  DYPlayer.byPathCommand(0x08, device, path);
+    DYPlayer.byPathCommand(0x08, device, path);
 }
 /*******************************************************************************
   @func    : setPlayingDevice
@@ -400,20 +394,20 @@ void playSpecifiedDevicePath(device_t device, char *path) {
   @brief   : Get the storage device that is currently used for playing sound files.
 ********************************************************************************/
 device_t getPlayingDevice(void) {
-/*
-  uint8_t command[3] = { 0xaa, 0x0a, 0x00 };
-  sendCommand(command, 3, 0xb4);
-*/
+    /*
+      uint8_t command[3] = { 0xaa, 0x0a, 0x00 };
+      sendCommand(command, 3, 0xb4);
+    */
 
-  sendCommand( &controlCommands[QCURRENTPLAY_CMD][0]            ,
-    		   LENGTHOF_COMMANDS				  		   		,
-			   controlCommands[QCURRENTPLAY_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QCURRENTPLAY_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QCURRENTPLAY_CMD][CMD_CRC_INDEX]);
 
-  uint8_t buffer[5];
-  if (DYPlayer.getResponse(buffer, 5)) {
-    return (device_t)buffer[3];
-  }
-  return Failed;
+    uint8_t buffer[5];
+    if (DYPlayer.getResponse(buffer, 5)) {
+        return (device_t)buffer[3];
+    }
+    return Failed;
 }
 /*******************************************************************************
   @func    : getPlayingDevice
@@ -421,22 +415,22 @@ device_t getPlayingDevice(void) {
   @return  : void
   @date	   : 30.11.22
   @brief   : Set the device number the module should use.
-     		 Tries to set the device but no guarantee is given, use `getDevice()`
-     		 to check the actual current storage device.
+             Tries to set the device but no guarantee is given, use `getDevice()`
+             to check the actual current storage device.
 ********************************************************************************/
 void setPlayingDevice(device_t device) {
-  /*
-  uint8_t command[4] = { 0xaa, 0x0b, 0x01, 0x00 };
-  */
+    /*
+    uint8_t command[4] = { 0xaa, 0x0b, 0x01, 0x00 };
+    */
 
-  uint8_t command[4] = {0};
+    uint8_t command[4] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SWTICHDRIVE_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SWTICHDRIVE_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = (uint8_t) device;
-  sendCommand_nocrc(command, 4);
+    command[3] = (uint8_t)device;
+    sendCommand_nocrc(command, 4);
 }
 /*******************************************************************************
   @func    : getSoundCount
@@ -446,20 +440,20 @@ void setPlayingDevice(device_t device) {
   @brief   : Get the amount of sound files on the current storage device.
 ********************************************************************************/
 uint16_t getSoundCount(void) {
-/*
-  uint8_t command[3] = { 0xaa, 0x0c, 0x00 };
-  sendCommand(command, 3, 0xb6);
-*/
+    /*
+      uint8_t command[3] = { 0xaa, 0x0c, 0x00 };
+      sendCommand(command, 3, 0xb6);
+    */
 
-  sendCommand( &controlCommands[QNUMBEROFSONG_CMD][0]            ,
-    		   LENGTHOF_COMMANDS				  		   		 ,
-			   controlCommands[QNUMBEROFSONG_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QNUMBEROFSONG_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QNUMBEROFSONG_CMD][CMD_CRC_INDEX]);
 
-  uint8_t buffer[6];
-  if(DYPlayer.getResponse(buffer, 6)) {
-    return (buffer[3] << 8) | buffer[4];
-  }
-  return 0;
+    uint8_t buffer[6];
+    if (DYPlayer.getResponse(buffer, 6)) {
+        return (buffer[3] << 8) | buffer[4];
+    }
+    return 0;
 }
 /*******************************************************************************
   @func    : getPlayingSound
@@ -469,20 +463,20 @@ uint16_t getSoundCount(void) {
   @brief   : Get the currently playing file by number.
 ********************************************************************************/
 uint16_t getPlayingSound(void) {
-/*
-  uint8_t command[3] = { 0xaa, 0x0d, 0x00 };
-  sendCommand(command, 3, 0xb7);
-*/
+    /*
+      uint8_t command[3] = { 0xaa, 0x0d, 0x00 };
+      sendCommand(command, 3, 0xb7);
+    */
 
-  sendCommand( &controlCommands[QCURRENTSONG_CMD][0]            ,
-	    	   LENGTHOF_COMMANDS				  		   		 ,
-			   controlCommands[QCURRENTSONG_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QCURRENTSONG_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QCURRENTSONG_CMD][CMD_CRC_INDEX]);
 
-  uint8_t buffer[6];
-  if(DYPlayer.getResponse(buffer, 6)) {
-    return (buffer[3] << 8) | buffer[4];
-  }
-  return 0;
+    uint8_t buffer[6];
+    if (DYPlayer.getResponse(buffer, 6)) {
+        return (buffer[3] << 8) | buffer[4];
+    }
+    return 0;
 }
 /*******************************************************************************
   @func    : previousDir
@@ -491,29 +485,27 @@ uint16_t getPlayingSound(void) {
   @date	   : 30.11.22
   @brief   : Select previous directory and start playing the first or last song.
 ********************************************************************************/
-void previousDir (playDirSound_t song) {
- if (song == LastSound)
- {
-    /*
-    uint8_t command[3] = { 0xaa, 0x0e, 0x00 };
-    sendCommand(command, 3, 0xb8);
-    */
-    sendCommand( &controlCommands[PREV_FILE][0]            ,
-    		     LENGTHOF_COMMANDS				  		   		 ,
-    			 controlCommands[PREV_FILE][CMD_CRC_INDEX] );
-
-  }
-  else /* FirstSound */
-  {
-	/*
-    uint8_t command[3] = { 0xaa, 0x0f, 0x00 };
-    sendCommand(command, 3, 0xb9);
-    */
-	sendCommand( &controlCommands[NEXT_FILE][0]            ,
-	      		 LENGTHOF_COMMANDS				  		   		 ,
-	      		 controlCommands[NEXT_FILE][CMD_CRC_INDEX] );
-
-  }
+void previousDir(playDirSound_t song) {
+    if (song == LastSound)
+    {
+        /*
+        uint8_t command[3] = { 0xaa, 0x0e, 0x00 };
+        sendCommand(command, 3, 0xb8);
+        */
+        sendCommand(&controlCommands[PREV_FILE][0],
+                    LENGTHOF_COMMANDS,
+                    controlCommands[PREV_FILE][CMD_CRC_INDEX]);
+    }
+    else   /* FirstSound */
+    {
+        /*
+        uint8_t command[3] = { 0xaa, 0x0f, 0x00 };
+        sendCommand(command, 3, 0xb9);
+        */
+        sendCommand(&controlCommands[NEXT_FILE][0],
+                    LENGTHOF_COMMANDS,
+                    controlCommands[NEXT_FILE][CMD_CRC_INDEX]);
+    }
 }
 /*******************************************************************************
   @func    : getFirstInDir
@@ -523,20 +515,20 @@ void previousDir (playDirSound_t song) {
   @brief   : Get number of the first song in the currently selected directory.
 ********************************************************************************/
 uint16_t getFirstInDir(void) {
-  /*
-  uint8_t command[3] = { 0xaa, 0x11, 0x00 };
-  sendCommand(command, 3, 0xbb);
-  */
+    /*
+    uint8_t command[3] = { 0xaa, 0x11, 0x00 };
+    sendCommand(command, 3, 0xbb);
+    */
 
-   sendCommand( &controlCommands[QFOLDERDIR_CMD][0]            ,
-		      	LENGTHOF_COMMANDS				  		   		 ,
-		      	controlCommands[QFOLDERDIR_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QFOLDERDIR_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QFOLDERDIR_CMD][CMD_CRC_INDEX]);
 
-  uint8_t buffer[6];
-  if(DYPlayer.getResponse(buffer, 6)) {
-    return (buffer[3] << 8) | buffer[4];
-  }
-  return 0;
+    uint8_t buffer[6];
+    if (DYPlayer.getResponse(buffer, 6)) {
+        return (buffer[3] << 8) | buffer[4];
+    }
+    return 0;
 }
 /*******************************************************************************
   @func    : getSoundCountDir
@@ -546,20 +538,20 @@ uint16_t getFirstInDir(void) {
   @brief   : Get the amount of sound files in the currently selected directory.
 ********************************************************************************/
 uint16_t getSoundCountDir(void) {
-  /*
-  uint8_t command[3] = { 0xaa, 0x12, 0x00 };
-  sendCommand(command, 3, 0xbc);
-  */
+    /*
+    uint8_t command[3] = { 0xaa, 0x12, 0x00 };
+    sendCommand(command, 3, 0xbc);
+    */
 
-  sendCommand( &controlCommands[QFOLDERNUMBER_CMD][0]            ,
-	      	   LENGTHOF_COMMANDS				 		 ,
-	      	   controlCommands[QFOLDERNUMBER_CMD][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[QFOLDERNUMBER_CMD][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[QFOLDERNUMBER_CMD][CMD_CRC_INDEX]);
 
-  uint8_t buffer[6];
-  if(DYPlayer.getResponse(buffer, 6)) {
-    return (buffer[3] << 8) | buffer[4];
-  }
-  return 0;
+    uint8_t buffer[6];
+    if (DYPlayer.getResponse(buffer, 6)) {
+        return (buffer[3] << 8) | buffer[4];
+    }
+    return 0;
 }
 /*******************************************************************************
   @func    : setVolume
@@ -567,21 +559,21 @@ uint16_t getSoundCountDir(void) {
   @return  : void
   @date	   : 30.11.22
   @brief   : Set the playback volume between 0 and 30.
-  	  	  	 Default volume if not set: 20.
+             Default volume if not set: 20.
 ********************************************************************************/
 void setVolume(uint8_t volume) {
-  /*
-  uint8_t command[4] = { 0xaa, 0x13, 0x01, 0x00 };
-  */
+    /*
+    uint8_t command[4] = { 0xaa, 0x13, 0x01, 0x00 };
+    */
 
-  uint8_t command[4] = {0};
+    uint8_t command[4] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SETVOLUME_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SETVOLUME_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = volume;
-  sendCommand_nocrc(command, 4);
+    command[3] = volume;
+    sendCommand_nocrc(command, 4);
 }
 /*******************************************************************************
   @func    : volumeIncrease
@@ -591,14 +583,13 @@ void setVolume(uint8_t volume) {
   @brief   : Increase the volume.
 ********************************************************************************/
 void volumeIncrease(void) {
-  /*
-  uint8_t command[3] = {0xaa, 0x14, 0x00};
-  sendCommand(command, 3, 0xbe);
-  */
-  sendCommand( &controlCommands[VOLUME_INC][0]             ,
-		      	LENGTHOF_COMMANDS				  		   ,
-		      	controlCommands[VOLUME_INC][CMD_CRC_INDEX] );
-
+    /*
+    uint8_t command[3] = {0xaa, 0x14, 0x00};
+    sendCommand(command, 3, 0xbe);
+    */
+    sendCommand(&controlCommands[VOLUME_INC][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[VOLUME_INC][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : volumeDecrease
@@ -608,14 +599,14 @@ void volumeIncrease(void) {
   @brief   : Decrease the volume.
 ********************************************************************************/
 void volumeDecrease(void) {
-  /*
-  uint8_t command[3] = {0xaa, 0x15, 0x00};
-  sendCommand(command, 3, 0xbf);
-  */
+    /*
+    uint8_t command[3] = {0xaa, 0x15, 0x00};
+    sendCommand(command, 3, 0xbf);
+    */
 
-  sendCommand( &controlCommands[VOLUME_DEC][0]             ,
-			   LENGTHOF_COMMANDS				  		   ,
-			   controlCommands[VOLUME_DEC][CMD_CRC_INDEX] );
+    sendCommand(&controlCommands[VOLUME_DEC][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[VOLUME_DEC][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : interludeSpecified
@@ -629,13 +620,12 @@ void volumeDecrease(void) {
              the first interlude breakpoint and continue to play.
 ********************************************************************************/
 void interludeSpecified(device_t device, uint16_t number) {
+    uint8_t command[6] = {0xaa, 0x0b, 0x03, 0x00, 0x00, 0x00};
 
-  uint8_t command[6] = { 0xaa, 0x0b, 0x03, 0x00, 0x00, 0x00 };
-
-  command[3] = (uint8_t) device;
-  command[4] = number >> 8;
-  command[5] = number & 0xff;
-  sendCommand_nocrc(command, 6);
+    command[3] = (uint8_t)device;
+    command[4] = number >> 8;
+    command[5] = number & 0xff;
+    sendCommand_nocrc(command, 6);
 }
 /*******************************************************************************
   @func    : interludeSpecifiedDevicePath
@@ -643,13 +633,13 @@ void interludeSpecified(device_t device, uint16_t number) {
   @return  : void
   @date	   : 30.11.22
   @brief   : Play an interlude by device and path.
-       		 Note from the manual: "Music interlude" only has level 1. Continuous
-       		 interlude will cover the previous interlude (the interlude will be
-       	 	 played immediately). When the interlude is finished, it will return to
-       		 the first interlude breakpoint and continue to play.
+             Note from the manual: "Music interlude" only has level 1. Continuous
+             interlude will cover the previous interlude (the interlude will be
+             played immediately). When the interlude is finished, it will return to
+             the first interlude breakpoint and continue to play.
 ********************************************************************************/
 void interludeSpecifiedDevicePath(device_t device, char *path) {
-  DYPlayer.byPathCommand(0x17, device, path);
+    DYPlayer.byPathCommand(0x17, device, path);
 }
 /*******************************************************************************
   @func    : stopInterlude
@@ -659,13 +649,13 @@ void interludeSpecifiedDevicePath(device_t device, char *path) {
   @brief   : Stop the interlude and continue playing.
 ********************************************************************************/
 void stopInterlude(void) {
-  /*
-  uint8_t command[3] = {0xaa, 0x10, 0x00};
-  sendCommand(command, 3, 0xba);
-  */
-  sendCommand( &controlCommands[STOP_PLAYING][0]             ,
-			   LENGTHOF_COMMANDS				  		   ,
-			   controlCommands[STOP_PLAYING][CMD_CRC_INDEX] );
+    /*
+    uint8_t command[3] = {0xaa, 0x10, 0x00};
+    sendCommand(command, 3, 0xba);
+    */
+    sendCommand(&controlCommands[STOP_PLAYING][0],
+                LENGTHOF_COMMANDS,
+                controlCommands[STOP_PLAYING][CMD_CRC_INDEX]);
 }
 /*******************************************************************************
   @func    : setCycleMode
@@ -675,17 +665,17 @@ void stopInterlude(void) {
   @brief   : Sets the cycle mode
 ********************************************************************************/
 void setCycleMode(play_mode_t mode) {
-  /*
-  uint8_t command[4] = { 0xaa, 0x18, 0x01, 0x00 };
-  */
-  uint8_t command[4] = {0};
+    /*
+    uint8_t command[4] = { 0xaa, 0x18, 0x01, 0x00 };
+    */
+    uint8_t command[4] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SETLOOPMODE_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SETLOOPMODE_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = mode;
-  sendCommand_nocrc(command, 4);
+    command[3] = mode;
+    sendCommand_nocrc(command, 4);
 }
 /*******************************************************************************
   @func    : setCycleTimes
@@ -695,19 +685,19 @@ void setCycleMode(play_mode_t mode) {
   @brief   : Set how many cycles to play when in cycle modes 0, 1 or 4
 ********************************************************************************/
 void setCycleTimes(uint16_t cycles) {
-  /*
-  uint8_t command[5] = { 0xaa, 0x19, 0x02, 0x00, 0x00 };
-  */
+    /*
+    uint8_t command[5] = { 0xaa, 0x19, 0x02, 0x00, 0x00 };
+    */
 
-  uint8_t command[5] = {0};
+    uint8_t command[5] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SETCYCTIMES_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SETCYCTIMES_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = cycles >> 8;
-  command[4] = cycles & 0xff;
-  sendCommand_nocrc(command, 5);
+    command[3] = cycles >> 8;
+    command[4] = cycles & 0xff;
+    sendCommand_nocrc(command, 5);
 }
 /*******************************************************************************
   @func    : setEq
@@ -717,18 +707,18 @@ void setCycleTimes(uint16_t cycles) {
   @brief   : Set the equalizer setting.
 ********************************************************************************/
 void setEq(eq_t eq) {
-  /*
-   uint8_t command[4] = { 0xaa, 0x1a, 0x01, 0x00 };
-   */
+    /*
+     uint8_t command[4] = { 0xaa, 0x1a, 0x01, 0x00 };
+     */
 
-  uint8_t command[4] = {0};
+    uint8_t command[4] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SETEQ_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SETEQ_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = (uint8_t) eq;
-  sendCommand_nocrc(command, 4);
+    command[3] = (uint8_t)eq;
+    sendCommand_nocrc(command, 4);
 }
 /*******************************************************************************
   @func    : select
@@ -738,19 +728,19 @@ void setEq(eq_t eq) {
   @brief   : Select a sound file without playing it.  e.g. `1` for `00001.mp3`.
 ********************************************************************************/
 void select(uint16_t number) {
-  /*
-  uint8_t command[5] = { 0xaa, 0x1f, 0x02, 0x00, 0x00};
-  */
+    /*
+    uint8_t command[5] = { 0xaa, 0x1f, 0x02, 0x00, 0x00};
+    */
 
-  uint8_t command[5] = {0};
+    uint8_t command[5] = {0};
 
-  memcpy( &command[0] ,
-		  &controlCommands[SLCTBUTNOPLAY_CMD][0],
-		  LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SLCTBUTNOPLAY_CMD][0],
+           LENGTHOF_COMMANDS);
 
-  command[3] = number >> 8;
-  command[4] = number & 0xff;
-  sendCommand_nocrc(command, 5);
+    command[3] = number >> 8;
+    command[4] = number & 0xff;
+    sendCommand_nocrc(command, 5);
 }
 /*******************************************************************************
   @func    : combinationPlay
@@ -771,23 +761,23 @@ void select(uint16_t number) {
              well be more combinations! Also see
 ********************************************************************************/
 void combinationPlay(char *sounds[], uint8_t len) {
-  if (len < 1) return;
-  // This part of the command can be easily determined already.
-  uint8_t command[3] = { 0xaa, 0x1b, 0x00 };
-  command[2] = len * 2;
-  // Depends on the length, checksum is a sum so we can add the other values
-  // later.
-  uint8_t crc = checksum(command, 3);
-  // Send the command and length already.
-  serialWrite(command, 3);
-  // Send each pair of chars containing the file name and add the values of
-  // each char to the crc.
-  for (uint8_t i=0; i < len; i++) {
-    crc += checksum((uint8_t*) sounds[i], 2);
-    serialWrite((uint8_t*) sounds[i], 2);
-  }
-  // Lastly, write the crc value.
-  serialWrite_crc(crc);
+    if (len < 1) return;
+    // This part of the command can be easily determined already.
+    uint8_t command[3] = {0xaa, 0x1b, 0x00};
+    command[2] = len * 2;
+    // Depends on the length, checksum is a sum so we can add the other values
+    // later.
+    uint8_t crc = checksum(command, 3);
+    // Send the command and length already.
+    serialWrite(command, 3);
+    // Send each pair of chars containing the file name and add the values of
+    // each char to the crc.
+    for (uint8_t i = 0; i < len; i++) {
+        crc += checksum((uint8_t *)sounds[i], 2);
+        serialWrite((uint8_t *)sounds[i], 2);
+    }
+    // Lastly, write the crc value.
+    serialWrite_crc(crc);
 }
 /*******************************************************************************
   @func    : endCombinationPlay
@@ -797,8 +787,8 @@ void combinationPlay(char *sounds[], uint8_t len) {
   @brief   : End combination play.
 ********************************************************************************/
 void endCombinationPlay(void) {
-  uint8_t command[3] = {0xaa, 0x1c, 0x00};
-  DYPlayer.sendCommand(command, 3, 0xc6);
+    uint8_t command[3] = {0xaa, 0x1c, 0x00};
+    DYPlayer.sendCommand(command, 3, 0xc6);
 }
 /*******************************************************************************
   @func    : getCycleMode
@@ -807,18 +797,17 @@ void endCombinationPlay(void) {
   @date	   : 30.11.22
   @brief   : Set Cycle mode
 ********************************************************************************/
-void getCycleMode(play_mode_t mode){
-	/*
-	uint8_t command[4] = {0xaa, 0x18, 0x01, 0x00};
-	*/
+void getCycleMode(play_mode_t mode) {
+    /*
+    uint8_t command[4] = {0xaa, 0x18, 0x01, 0x00};
+    */
 
-	uint8_t command[4] = {0};
+    uint8_t command[4] = {0};
 
-	memcpy( &command[0] ,
-		    &controlCommands[SETLOOPMODE_CMD][0],
-		    LENGTHOF_COMMANDS);
+    memcpy(&command[0],
+           &controlCommands[SETLOOPMODE_CMD][0],
+           LENGTHOF_COMMANDS);
 
-	command[3] = mode;
-	DYPlayer.sendCommand_nocrc(command, 4);
-
+    command[3] = mode;
+    DYPlayer.sendCommand_nocrc(command, 4);
 }
